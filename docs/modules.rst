@@ -7,40 +7,40 @@
 
 模块就是包含了Python定义和语句的文件。这个文件的名字就是模块名加上 ``.py`` 的后缀。在模块中，模块名(字符串)和全局变量 ``__name__`` 的值相同。例如，用你最喜欢的文本编辑器在当前目录创建叫 ``fibo.py`` 的文件，并输入以下内容：::
 
-	# Fibonacci numbers module
+    # Fibonacci numbers module
 
-	def fib(n):  # write Fibonacci series up to n
-	    a, b = 0, 1
-	    while b < n:
-	        print b
-	        a, b = b, a + b
+    def fib(n):  # write Fibonacci series up to n
+        a, b = 0, 1
+        while b < n:
+            print b
+            a, b = b, a + b
 
-	def fib2(n):  # return Fibonacci series up to n
-	    result = []
-	    a, b = 0, 1
-	    while b < n:
-	        result.append(b)
-	        a, b = b, a + b
-	    return result
+    def fib2(n):  # return Fibonacci series up to n
+        result = []
+        a, b = 0, 1
+        while b < n:
+            result.append(b)
+            a, b = b, a + b
+        return result
 
 现在在Python解释器中通过下面的指令导入该模块：
 
-	>>> import fibo
+    >>> import fibo
 
 这里没有直接输入 ``fibo`` 模块当前符号表中的函数名；只是输入了模块名 ``fibo``。使用模块名可以访问函数：
 
-	>>> fibo.fib(1000)
-	1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
-	>>> fibo.fib2(100)
-	[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
-	>>> fibo.__name__
-	'fibo'
+    >>> fibo.fib(1000)
+    1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+    >>> fibo.fib2(100)
+    [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+    >>> fibo.__name__
+    'fibo'
 
 如果你打算经常使用某个函数，你可以将函数赋予一个局部变量：
 
-	>>> fib = fibo.fib
-	>>> fib(500)
-	1 1 2 3 5 8 13 21 34 55 89 144 233 377
+    >>> fib = fibo.fib
+    >>> fib(500)
+    1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
 =============
 6.1. 深入模块
@@ -54,17 +54,17 @@
 
 以下是导入语句的一种变体，直接从模块中导入多个命名到当前模块符号表。例如：
 
-	>>> from fibo import fib, fib2
-	>>> fib(500)
-	1 1 2 3 5 8 13 21 34 55 89 144 233 377
+    >>> from fibo import fib, fib2
+    >>> fib(500)
+    1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
 这并不会引入模块名到当前的符号表(因此在上面的例子中，``fibo`` 并没有被定义)
 
 以下也是导入语句的一种变体，导入模块定义的所有命名：
 
-	>>> from fibo import *
-	>>> fib(500)
-	1 1 2 3 5 8 13 21 34 55 89 144 233 377
+    >>> from fibo import *
+    >>> fib(500)
+    1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
 这会导入所有除了以下划线(_)开头的命名。
 
@@ -72,17 +72,17 @@
 
 如果模块名后面跟着 ``as``，``as`` 后面的名字会直接和导入的模块绑定。
 
-	>>> import fibo as fib
-	>>> fib.fib(500)
-	0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
+    >>> import fibo as fib
+    >>> fib.fib(500)
+    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
 实际上，除了模块被命名为 ``fib`` 以外，这和通过 ``import fibo`` 来导入模块所做的事情是一样的。
 
 使用 ``from`` 时也可以以此来达到类似的效果：
 
-	>>> from fibo import fib as fibonacci
-	>>> fibonacci(500)
-	0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
+    >>> from fibo import fib as fibonacci
+    >>> fibonacci(500)
+    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
 .. note::
 
@@ -94,23 +94,23 @@
 
 当你通过下面的语句执行Python模块时
 
-	python fibo.py <arguments>
+    python fibo.py <arguments>
 
 就像你导入他时一样，模块中的代码会被执行，同时 ``__name__`` 会被设为 ``"__main__"``。这意味着通过在模块的结尾加上下面的代码
 
-	if __name__ == "__main__":
-	    import sys
-	    fib(int(sys.argv[1]))
+    if __name__ == "__main__":
+        import sys
+        fib(int(sys.argv[1]))
 
 由于只有当这个模块作为“main”文件被执行时这段代码才会解析命令行，你就能使该文件可作为脚本被调用，也可作为模块被导入：
 
-	$ python fibo.py 50
-	1 1 2 3 5 8 13 21 34
+    $ python fibo.py 50
+    1 1 2 3 5 8 13 21 34
 
 如果模块被导入，这段代码就不会运行：
 
-	>>> import fibo
-	>>>
+    >>> import fibo
+    >>>
 
 这通常用来为模块提供方便的用户接口，或用于测试目的(将模块作为脚本运行来执行测试)。
 
@@ -156,22 +156,22 @@
 
 Python带有一个标准模块库，通过叫做Python库参考手册(此后成为库参考手册)独立文档描述。一些模块内置于解释器中；这些操作提供对不属于语言核心但仍然内置的操作的访问，以提高效率或提供对系统调用等操作系统原语 *(译注：原文为operating system primitives)* 的访问。这些模块的集合是一个配置选项，它也取决于底层平台。例如，**winreg** 模块就只Windows平台下提供。有一个特别的模块需要注意：**sys**，它内置于所有Python解释器。变量 ``sys.ps1`` 和 ``sys.ps2`` 定义了主提示符和副提示符字符串：
 
-	>>> import sys
-	>>> sys.ps1
-	'>>> '
-	>>> sys.ps2
-	'... '
-	>>> sys.ps1 = 'C> '
-	C> print 'Yuck!'
-	Yuck!
-	C>
+    >>> import sys
+    >>> sys.ps1
+    '>>> '
+    >>> sys.ps2
+    '... '
+    >>> sys.ps1 = 'C> '
+    C> print 'Yuck!'
+    Yuck!
+    C>
 
 这两个变量只有在交互模式下才会被定义。
 
 变量 ``sys.path`` 是解释器模块搜索路径的字符串列表。它由环境变量 **PYTHONPATH** 初始化，如果没有设定 **PYTHONPATH** ，就由内置的默认值初始化。你可以通过标准的列表操作来修改它：
 
-	>>> import sys
-	>>> sys.path.append('/ufs/guido/lib/python')
+    >>> import sys
+    >>> sys.path.append('/ufs/guido/lib/python')
 
 ===================
 6.3. **dir()** 函数
@@ -179,66 +179,66 @@ Python带有一个标准模块库，通过叫做Python库参考手册(此后成�
 
 内置函数 **dir()** 用于找出模块中定义的所有命名。它返回一个排序的字符串列表：
 
-	>>> import fibo, sys
-	>>> dir(fibo)
-	['__name__', 'fib', 'fib2']
-	>>> dir(sys)
-	['__displayhook__', '__doc__', '__excepthook__', '__name__', '__package__',
-	'__stderr__', '__stdin__', '__stdout__', '_clear_type_cache',
-	'_current_frames', '_getframe', '_mercurial', 'api_version', 'argv',
-	'builtin_module_names', 'byteorder', 'call_tracing', 'callstats',
-	'copyright', 'displayhook', 'dont_write_bytecode', 'exc_clear', 'exc_info',
-	'exc_traceback', 'exc_type', 'exc_value', 'excepthook', 'exec_prefix',
-	'executable', 'exit', 'flags', 'float_info', 'float_repr_style',
-	'getcheckinterval', 'getdefaultencoding', 'getdlopenflags',
-	'getfilesystemencoding', 'getobjects', 'getprofile', 'getrecursionlimit',
-	'getrefcount', 'getsizeof', 'gettotalrefcount', 'gettrace', 'hexversion',
-	'long_info', 'maxint', 'maxsize', 'maxunicode', 'meta_path', 'modules',
-	'path', 'path_hooks', 'path_importer_cache', 'platform', 'prefix', 'ps1',
-	'py3kwarning', 'setcheckinterval', 'setdlopenflags', 'setprofile',
-	'setrecursionlimit', 'settrace', 'stderr', 'stdin', 'stdout', 'subversion',
-	'version', 'version_info', 'warnoptions']
+    >>> import fibo, sys
+    >>> dir(fibo)
+    ['__name__', 'fib', 'fib2']
+    >>> dir(sys)
+    ['__displayhook__', '__doc__', '__excepthook__', '__name__', '__package__',
+    '__stderr__', '__stdin__', '__stdout__', '_clear_type_cache',
+    '_current_frames', '_getframe', '_mercurial', 'api_version', 'argv',
+    'builtin_module_names', 'byteorder', 'call_tracing', 'callstats',
+    'copyright', 'displayhook', 'dont_write_bytecode', 'exc_clear', 'exc_info',
+    'exc_traceback', 'exc_type', 'exc_value', 'excepthook', 'exec_prefix',
+    'executable', 'exit', 'flags', 'float_info', 'float_repr_style',
+    'getcheckinterval', 'getdefaultencoding', 'getdlopenflags',
+    'getfilesystemencoding', 'getobjects', 'getprofile', 'getrecursionlimit',
+    'getrefcount', 'getsizeof', 'gettotalrefcount', 'gettrace', 'hexversion',
+    'long_info', 'maxint', 'maxsize', 'maxunicode', 'meta_path', 'modules',
+    'path', 'path_hooks', 'path_importer_cache', 'platform', 'prefix', 'ps1',
+    'py3kwarning', 'setcheckinterval', 'setdlopenflags', 'setprofile',
+    'setrecursionlimit', 'settrace', 'stderr', 'stdin', 'stdout', 'subversion',
+    'version', 'version_info', 'warnoptions']
 
 不带参数时，**dir()** 列出当前定义的命名：
 
-	>>> a = [1, 2, 3, 4, 5]
-	>>> import fibo
-	>>> fib = fibo.fib
-	>>> dir()
-	['__builtins__', '__name__', '__package__', 'a', 'fib', 'fibo', 'sys']
+    >>> a = [1, 2, 3, 4, 5]
+    >>> import fibo
+    >>> fib = fibo.fib
+    >>> dir()
+    ['__builtins__', '__name__', '__package__', 'a', 'fib', 'fibo', 'sys']
 
 需要注意的是，它列出所有类型的命名：变量、模块、函数等。
 
 **dir()** 不列出内置的函数和变量。如果你想要内置模块的列表，它们都定义于标准模块 **__builtin__**：
 
-	>>> import __builtin__
-	>>> dir(__builtin__)
-	['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException',
-	'BufferError', 'BytesWarning', 'DeprecationWarning', 'EOFError',
-	'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FloatingPointError',
-	'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning',
-	'IndentationError', 'IndexError', 'KeyError', 'KeyboardInterrupt',
-	'LookupError', 'MemoryError', 'NameError', 'None', 'NotImplemented',
-	'NotImplementedError', 'OSError', 'OverflowError',
-	'PendingDeprecationWarning', 'ReferenceError', 'RuntimeError',
-	'RuntimeWarning', 'StandardError', 'StopIteration', 'SyntaxError',
-	'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'True',
-	'TypeError', 'UnboundLocalError', 'UnicodeDecodeError',
-	'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError',
-	'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning',
-	'ZeroDivisionError', '_', '__debug__', '__doc__', '__import__',
-	'__name__', '__package__', 'abs', 'all', 'any', 'apply', 'basestring',
-	'bin', 'bool', 'buffer', 'bytearray', 'bytes', 'callable', 'chr',
-	'classmethod', 'cmp', 'coerce', 'compile', 'complex', 'copyright',
-	'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval',
-	'execfile', 'exit', 'file', 'filter', 'float', 'format', 'frozenset',
-	'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input',
-	'int', 'intern', 'isinstance', 'issubclass', 'iter', 'len', 'license',
-	'list', 'locals', 'long', 'map', 'max', 'memoryview', 'min', 'next',
-	'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit',
-	'range', 'raw_input', 'reduce', 'reload', 'repr', 'reversed', 'round',
-	'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super',
-	'tuple', 'type', 'unichr', 'unicode', 'vars', 'xrange', 'zip']
+    >>> import __builtin__
+    >>> dir(__builtin__)
+    ['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException',
+    'BufferError', 'BytesWarning', 'DeprecationWarning', 'EOFError',
+    'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FloatingPointError',
+    'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning',
+    'IndentationError', 'IndexError', 'KeyError', 'KeyboardInterrupt',
+    'LookupError', 'MemoryError', 'NameError', 'None', 'NotImplemented',
+    'NotImplementedError', 'OSError', 'OverflowError',
+    'PendingDeprecationWarning', 'ReferenceError', 'RuntimeError',
+    'RuntimeWarning', 'StandardError', 'StopIteration', 'SyntaxError',
+    'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'True',
+    'TypeError', 'UnboundLocalError', 'UnicodeDecodeError',
+    'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError',
+    'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning',
+    'ZeroDivisionError', '_', '__debug__', '__doc__', '__import__',
+    '__name__', '__package__', 'abs', 'all', 'any', 'apply', 'basestring',
+    'bin', 'bool', 'buffer', 'bytearray', 'bytes', 'callable', 'chr',
+    'classmethod', 'cmp', 'coerce', 'compile', 'complex', 'copyright',
+    'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval',
+    'execfile', 'exit', 'file', 'filter', 'float', 'format', 'frozenset',
+    'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input',
+    'int', 'intern', 'isinstance', 'issubclass', 'iter', 'len', 'license',
+    'list', 'locals', 'long', 'map', 'max', 'memoryview', 'min', 'next',
+    'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit',
+    'range', 'raw_input', 'reduce', 'reload', 'repr', 'reversed', 'round',
+    'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super',
+    'tuple', 'type', 'unichr', 'unicode', 'vars', 'xrange', 'zip']
 
 =======
 6.4. 包
